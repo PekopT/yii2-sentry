@@ -49,9 +49,12 @@ class ConsoleCollector extends BaseCollector
 
         $this->commandStartTime = defined('YII_BEGIN_TIME') ? YII_BEGIN_TIME : microtime(true);
 
-        // Start transaction for this console command
+        // Create transaction IMMEDIATELY (before any DB queries during bootstrap)
+        $this->transaction = $this->startGenericTransaction();
+
+        // Update transaction with specific command details when available
         Event::on(Controller::class, Controller::EVENT_BEFORE_ACTION, function ($event) {
-            $this->transaction = $this->startCommandTransaction($event);
+            $this->updateTransactionWithCommandInfo($event);
         });
 
         Event::on(Application::class, Application::EVENT_AFTER_REQUEST, function () {
@@ -76,27 +79,16 @@ class ConsoleCollector extends BaseCollector
     }
 
     /**
-     * Starts a transaction for the current console command
+     * Starts a generic transaction immediately (before command details are known)
+     * This ensures early database queries during bootstrap can attach to a parent span
      *
-     * @param Event $event
      * @return \Sentry\Tracing\Transaction|null
      */
-    protected function startCommandTransaction($event): ?Transaction
+    protected function startGenericTransaction(): ?Transaction
     {
         try {
-            $controller = $event->sender;
-            $action = $event->action;
-
-            if (!$controller || !$action) {
-                return null;
-            }
-
             $context = new TransactionContext();
-
-            $commandName = get_class($controller) . '::' . $action->id;
-            $shortName = $controller->id . '/' . $action->id;
-
-            $context->setName($commandName);
+            $context->setName('console.command');
             $context->setOp('console.command');
 
             if (defined('YII_BEGIN_TIME')) {
@@ -106,9 +98,48 @@ class ConsoleCollector extends BaseCollector
             $transaction = SentrySdk::getCurrentHub()->startTransaction($context);
 
             if (!$transaction) {
-                Yii::error('Failed to start transaction for console command', $this->logCategory);
+                Yii::error('Failed to start generic console transaction', $this->logCategory);
                 return null;
             }
+
+            // Make transaction active immediately so early DB queries can attach
+            SentrySdk::getCurrentHub()->configureScope(function (Scope $scope) use ($transaction) {
+                $scope->setSpan($transaction);
+            });
+
+            Yii::info('Started generic console transaction (will update with command details)', $this->logCategory);
+
+            return $transaction;
+        } catch (\Throwable $e) {
+            Yii::error('Error starting Sentry transaction: ' . $e->getMessage(), $this->logCategory);
+            return null;
+        }
+    }
+
+    /**
+     * Updates the transaction with specific command information once available
+     *
+     * @param Event $event
+     */
+    protected function updateTransactionWithCommandInfo($event): void
+    {
+        if (!$this->transaction) {
+            return;
+        }
+
+        try {
+            $controller = $event->sender;
+            $action = $event->action;
+
+            if (!$controller || !$action) {
+                return;
+            }
+
+            $commandName = get_class($controller) . '::' . $action->id;
+            $shortName = $controller->id . '/' . $action->id;
+
+            // Update transaction name with specific command
+            $this->transaction->setName($commandName);
 
             $this->commandData = [
                 'command' => $controller->id,
@@ -119,16 +150,12 @@ class ConsoleCollector extends BaseCollector
                 'start_time' => $this->commandStartTime,
             ];
 
-            $transaction->setData([
+            $this->transaction->setData([
                 'command' => $shortName,
                 'action' => $action->id,
                 'controller' => get_class($controller),
                 'params' => $this->sanitizeParams(Yii::$app->request->getParams()),
             ]);
-
-            SentrySdk::getCurrentHub()->configureScope(function (Scope $scope) use ($transaction) {
-                $scope->setSpan($transaction);
-            });
 
             $this->addBreadcrumb(
                 "Console Command: {$shortName}",
@@ -140,12 +167,9 @@ class ConsoleCollector extends BaseCollector
                 'console.command'
             );
 
-            Yii::info('Started console command transaction: ' . $commandName, $this->logCategory);
-
-            return $transaction;
+            Yii::info('Updated console transaction with command: ' . $commandName, $this->logCategory);
         } catch (\Throwable $e) {
-            Yii::error('Error starting Sentry transaction for console command: ' . $e->getMessage(), $this->logCategory);
-            return null;
+            Yii::error('Error updating console transaction: ' . $e->getMessage(), $this->logCategory);
         }
     }
 
