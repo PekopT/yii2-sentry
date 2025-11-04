@@ -20,7 +20,7 @@ Complete [Sentry](https://sentry.io) integration for Yii2 framework: logging, tr
 Install the package via composer:
 
 ```bash
-composer require tzabzlat/yii2-sentry
+composer require pekopt/yii2-sentry
 ```
 
 For using performance profiling features, you need to install the PHP [Excimer extension](https://github.com/wikimedia/mediawiki-php-excimer).
@@ -34,11 +34,11 @@ Add to your application configuration (not `common`):
 ```php
 'bootstrap' => ['sentry'],
 'log'          => [
-    'logger'  => 'tzabzlat\yii2sentry\Logger',
+    'logger'  => 'pekopt\yii2sentry\Logger',
 ]
 'components' => [
     'sentry' => [
-        'class' => 'tzabzlat\yii2sentry\SentryComponent',
+        'class' => 'pekopt\yii2sentry\SentryComponent',
         'dsn' => 'https://your-sentry-dsn@sentry.io/project',
         'environment' => YII_ENV,
         // Sampling rate (percentage of requests for performance metrics collection)
@@ -116,7 +116,7 @@ You can configure each collector separately through the `collectorsConfig` param
 
 ```php
 'sentry' => [
-    'class' => 'tzabzlat\yii2sentry\SentryComponent',
+    'class' => 'pekopt\yii2sentry\SentryComponent',
     'dsn' => env('SENTRY_DSN', ''),
     'environment' => YII_ENV,
     'tracesSampleRatePercent' => YII_ENV_PROD ? 20 : 100,
@@ -188,8 +188,8 @@ You can create your own collector by implementing the `CollectorInterface` or ex
 ```php
 namespace app\components\sentry;
 
-use tzabzlat\yii2sentry\collectors\BaseCollector;
-use tzabzlat\yii2sentry\SentryComponent;
+use pekopt\yii2sentry\collectors\BaseCollector;
+use pekopt\yii2sentry\SentryComponent;
 use Sentry\Breadcrumb;
 use Sentry\State\Scope;
 use Yii;
