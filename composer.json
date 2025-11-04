@@ -1,5 +1,5 @@
 {
-  "name": "tzabzlat/yii2-sentry",
+  "name": "pekopt/yii2-sentry",
   "description": "Sentry integration for Yii2 framework with performance monitoring and error tracking",
   "type": "yii2-extension",
   "keywords": ["yii2", "sentry", "monitoring", "error tracking", "apm"],
@@ -8,6 +8,10 @@
     {
       "name": "Anatolii Afanasev",
       "email": "tzabzlat@gmail.com"
+    },
+    {
+      "name": "Alex Brilliantov",
+      "email": "alex@brilliantov.me"
     }
   ],
   "require": {
@@ -24,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "tzabzlat\\yii2sentry\\": "src/"
+      "pekopt\\yii2sentry\\": "src/"
     }
   },
   "config": {
