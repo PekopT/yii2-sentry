@@ -1,6 +1,6 @@
 # Yii2 Sentry
-[![Latest Stable Version](http://poser.pugx.org/tzabzlat/yii2-sentry/v)](https://packagist.org/packages/tzabzlat/yii2-sentry) 
-[![License](http://poser.pugx.org/tzabzlat/yii2-sentry/license)](https://packagist.org/packages/tzabzlat/yii2-sentry) [![PHP Version Require](http://poser.pugx.org/tzabzlat/yii2-sentry/require/php)](https://packagist.org/packages/tzabzlat/yii2-sentry)
+[![Latest Stable Version](http://poser.pugx.org/pekopt/yii2-sentry/v)](https://packagist.org/packages/pekopt/yii2-sentry) 
+[![License](http://poser.pugx.org/pekopt/yii2-sentry/license)](https://packagist.org/packages/pekopt/yii2-sentry) [![PHP Version Require](http://poser.pugx.org/pekopt/yii2-sentry/require/php)](https://packagist.org/packages/pekopt/yii2-sentry)
 
 *Read this in other languages: [English](README.md), [Русский](README.ru.md)*
 

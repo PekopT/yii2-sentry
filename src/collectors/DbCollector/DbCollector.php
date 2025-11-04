@@ -1,11 +1,11 @@
 <?php
 
-namespace tzabzlat\yii2sentry\collectors\DbCollector;
+namespace pekopt\yii2sentry\collectors\DbCollector;
 
-use tzabzlat\yii2sentry\collectors\BaseCollector;
-use tzabzlat\yii2sentry\enum\SpanOpEnum;
-use tzabzlat\yii2sentry\Logger as SentryLogger;
-use tzabzlat\yii2sentry\SentryComponent;
+use pekopt\yii2sentry\collectors\BaseCollector;
+use pekopt\yii2sentry\enum\SpanOpEnum;
+use pekopt\yii2sentry\Logger as SentryLogger;
+use pekopt\yii2sentry\SentryComponent;
 use Sentry\Breadcrumb;
 use Sentry\Tracing\SpanStatus;
 use Yii;
@@ -77,7 +77,7 @@ class DbCollector extends BaseCollector
         $logger = Yii::getLogger();
 
         $logger->registerHandler(
-            'tzabzlat\yii2sentry\collectors\DbCollector\DbCommand::internalExecute',
+            'pekopt\yii2sentry\collectors\DbCollector\DbCommand::internalExecute',
             [$this, 'handleProfileBegin'],
             [$this, 'handleProfileEnd']
         );

@@ -1,9 +1,9 @@
 <?php
 
-namespace tzabzlat\yii2sentry\collectors\LogCollector;
+namespace pekopt\yii2sentry\collectors\LogCollector;
 
-use tzabzlat\yii2sentry\collectors\BaseCollector;
-use tzabzlat\yii2sentry\SentryComponent;
+use pekopt\yii2sentry\collectors\BaseCollector;
+use pekopt\yii2sentry\SentryComponent;
 use Yii;
 
 class LogCollector extends BaseCollector

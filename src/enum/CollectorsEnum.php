@@ -1,6 +1,6 @@
 <?php
 
-namespace tzabzlat\yii2sentry\enum;
+namespace pekopt\yii2sentry\enum;
 
 class CollectorsEnum
 {

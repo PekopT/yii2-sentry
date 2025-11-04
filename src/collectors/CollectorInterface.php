@@ -1,8 +1,8 @@
 <?php
 
-namespace tzabzlat\yii2sentry\collectors;
+namespace pekopt\yii2sentry\collectors;
 
-use tzabzlat\yii2sentry\SentryComponent;
+use pekopt\yii2sentry\SentryComponent;
 use Sentry\State\Scope;
 
 interface CollectorInterface

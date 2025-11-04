@@ -1,17 +1,17 @@
 <?php
 
-namespace tzabzlat\yii2sentry;
+namespace pekopt\yii2sentry;
 
-use tzabzlat\yii2sentry\collectors\BaseCollector;
-use tzabzlat\yii2sentry\collectors\CollectorInterface;
-use tzabzlat\yii2sentry\collectors\ConsoleCollector;
-use tzabzlat\yii2sentry\collectors\DbCollector\DbCollector;
-use tzabzlat\yii2sentry\collectors\HttpClientCollector;
-use tzabzlat\yii2sentry\collectors\LogCollector\LogCollector;
-use tzabzlat\yii2sentry\collectors\LogCollector\LogTarget;
-use tzabzlat\yii2sentry\collectors\RequestCollector;
-use tzabzlat\yii2sentry\enum\CollectorsEnum;
-use tzabzlat\yii2sentry\enum\SpanOpEnum;
+use pekopt\yii2sentry\collectors\BaseCollector;
+use pekopt\yii2sentry\collectors\CollectorInterface;
+use pekopt\yii2sentry\collectors\ConsoleCollector;
+use pekopt\yii2sentry\collectors\DbCollector\DbCollector;
+use pekopt\yii2sentry\collectors\HttpClientCollector;
+use pekopt\yii2sentry\collectors\LogCollector\LogCollector;
+use pekopt\yii2sentry\collectors\LogCollector\LogTarget;
+use pekopt\yii2sentry\collectors\RequestCollector;
+use pekopt\yii2sentry\enum\CollectorsEnum;
+use pekopt\yii2sentry\enum\SpanOpEnum;
 use Sentry\Breadcrumb;
 use Sentry\ClientBuilder;
 use Sentry\SentrySdk;

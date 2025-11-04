@@ -1,6 +1,6 @@
 # Yii2 Sentry
-[![Latest Stable Version](http://poser.pugx.org/tzabzlat/yii2-sentry/v)](https://packagist.org/packages/tzabzlat/yii2-sentry)
-[![License](http://poser.pugx.org/tzabzlat/yii2-sentry/license)](https://packagist.org/packages/tzabzlat/yii2-sentry) [![PHP Version Require](http://poser.pugx.org/tzabzlat/yii2-sentry/require/php)](https://packagist.org/packages/tzabzlat/yii2-sentry)
+[![Latest Stable Version](http://poser.pugx.org/pekopt/yii2-sentry/v)](https://packagist.org/packages/pekopt/yii2-sentry)
+[![License](http://poser.pugx.org/pekopt/yii2-sentry/license)](https://packagist.org/packages/pekopt/yii2-sentry) [![PHP Version Require](http://poser.pugx.org/pekopt/yii2-sentry/require/php)](https://packagist.org/packages/pekopt/yii2-sentry)
 
 *Read this in other languages: [English](README.md), [Русский](README.ru.md)*
 
@@ -20,7 +20,7 @@
 Установить пакет через composer:
 
 ```bash
-composer require tzabzlat/yii2-sentry
+composer require pekopt/yii2-sentry
 ```
 
 Для использования функций профилирования производительности, необходимо установить расширение PHP [Excimer](https://github.com/wikimedia/mediawiki-php-excimer).
@@ -34,11 +34,11 @@ composer require tzabzlat/yii2-sentry
 ```php
 'bootstrap' => ['sentry'],
 'log'          => [
-    'logger'  => 'tzabzlat\yii2sentry\Logger',
+    'logger'  => 'pekopt\yii2sentry\Logger',
 ]
 'components' => [
     'sentry' => [
-        'class' => 'tzabzlat\yii2sentry\SentryComponent',
+        'class' => 'pekopt\yii2sentry\SentryComponent',
         'dsn' => 'https://your-sentry-dsn@sentry.io/project',
         'environment' => YII_ENV,
         // Sampling rate (percentage of requests for performance metrics collection)
@@ -116,7 +116,7 @@ try {
 
 ```php
 'sentry' => [
-    'class' => 'tzabzlat\yii2sentry\SentryComponent',
+    'class' => 'pekopt\yii2sentry\SentryComponent',
     'dsn' => env('SENTRY_DSN', ''),
     'environment' => YII_ENV,
     'tracesSampleRatePercent' => YII_ENV_PROD ? 20 : 100,
@@ -188,8 +188,8 @@ try {
 ```php
 namespace app\components\sentry;
 
-use tzabzlat\yii2sentry\collectors\BaseCollector;
-use tzabzlat\yii2sentry\SentryComponent;
+use pekopt\yii2sentry\collectors\BaseCollector;
+use pekopt\yii2sentry\SentryComponent;
 use Sentry\Breadcrumb;
 use Sentry\State\Scope;
 use Yii;

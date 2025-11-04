@@ -1,6 +1,6 @@
 <?php
 
-namespace tzabzlat\yii2sentry\collectors\DbCollector;
+namespace pekopt\yii2sentry\collectors\DbCollector;
 
 use Yii;
 

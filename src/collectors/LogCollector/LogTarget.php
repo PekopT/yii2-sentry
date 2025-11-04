@@ -1,6 +1,6 @@
 <?php
 
-namespace tzabzlat\yii2sentry\collectors\LogCollector;
+namespace pekopt\yii2sentry\collectors\LogCollector;
 
 use Sentry\EventHint;
 use Sentry\SentrySdk;

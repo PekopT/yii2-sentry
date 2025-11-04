@@ -1,6 +1,6 @@
 <?php
 
-namespace tzabzlat\yii2sentry;
+namespace pekopt\yii2sentry;
 
 use Yii;
 use yii\log\Logger as YiiLogger;
